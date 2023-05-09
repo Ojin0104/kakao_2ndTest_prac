@@ -145,7 +145,6 @@ public class Connector {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
 
         return JSONParsing.JsonToTruckArr(result);
