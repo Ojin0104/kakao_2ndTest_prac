@@ -1,7 +1,7 @@
 public class ConstantString {
     public static String BASE_URL="https://kox947ka1a.execute-api.ap-northeast-2.amazonaws.com/prod/users";
 
-    public static String AUTH_TOKEN="523673768fbb94484963968d3f56070a";
+    public static String AUTH_TOKEN="74dadc2ebe882322f07775ad32351cd8";
 
     public static String START_API="/start";
 

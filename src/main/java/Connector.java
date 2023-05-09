@@ -3,6 +3,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 import org.json.simple.JSONArray;
@@ -111,7 +112,7 @@ public class Connector {
 
     }
 
-    public static String trucksApi(String Auth_Key) {
+    public static ArrayList<Truck> trucksApi(String Auth_Key) {
         URL url;
         StringBuilder response = new StringBuilder();
         JSONObject result = null;
@@ -147,7 +148,7 @@ public class Connector {
 
         }
 
-        return result.toString();
+        return JSONParsing.JsonToTruckArr(result);
     }
 
     public static String simulateApi(String Auth_Key){

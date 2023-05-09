@@ -4,6 +4,12 @@ public class Truck {
     private int location_id;
     private int loaded_bikes_id;
 
+    public Truck(int id, int location_id, int loaded_bikes_id) {
+        this.id = id;
+        this.location_id = location_id;
+        this.loaded_bikes_id = loaded_bikes_id;
+    }
+
     public int getId() {
         return id;
     }
