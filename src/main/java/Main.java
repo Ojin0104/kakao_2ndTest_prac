@@ -102,27 +102,23 @@ public class Main {
                 trucks.get(j).setLocation_id(takeSpace.get(i).getId());// 위치이동
 
                 countBike(trucks.get(j),takeSpace.get(i),truckCommand);//트럭 소요시간 수정 및 트럭 싣고있는 바이크 수 증가
-                int dist=getShortest(trucks.get(j),5,takeSpace.get(i));
 
-                truckCommand.getCommand().add(1);//이 코드로 트럭 운전해줌
-                int move_time=dist*2*6;
-                int can_bikenum=(trucks.get(j).getTime_remaining()-move_time)/12;
 
             }
         }
     }
 
-    private static void countBike(Truck truck,Location space,Command command) {
-        if(space.getLocated_bikes_count()-average>0){//바이크를 뺴야하는 경우 평균까지만
-            while(space.getLocated_bikes_count()>average&&truck.getTime_remaining()>=6) {
-                space.setLocated_bikes_count(space.getLocated_bikes_count() - 1);
+    private static void countBike(Truck truck,Location location,Command command) {
+        if(location.getLocated_bikes_count()-average>0){//바이크를 뺴야하는 경우 평균까지만
+            while(location.getLocated_bikes_count()>average&&truck.getTime_remaining()>=6) {
+                location.setLocated_bikes_count(location.getLocated_bikes_count() - 1);
                 truck.useTime();
                 truck.setLoaded_bikes_count(truck.getLoaded_bikes_count() + 1);
                 command.getCommand().add(5);
             }
         }else{
-            while(space.getLocated_bikes_count()<average&&truck.getTime_remaining()>=6) {
-                space.setLocated_bikes_count(space.getLocated_bikes_count() + 1);
+            while(location.getLocated_bikes_count()<average&&truck.getTime_remaining()>=6) {
+                location.setLocated_bikes_count(location.getLocated_bikes_count() + 1);
                 truck.useTime();
                 truck.setLoaded_bikes_count(truck.getLoaded_bikes_count() - 1);
                 command.getCommand().add(6);
@@ -132,6 +128,6 @@ public class Main {
 
 
     private static void findRoute(Truck truck, Location location, Command truckCommand) {
-
+    int
     }
 }
