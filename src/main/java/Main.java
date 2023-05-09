@@ -28,6 +28,24 @@ public class Main {
 
         }
         System.out.println(Connector.scoreApi(Auth_Key));
+
+        Auth_Key=Connector.startApi(2);
+        average=3;
+        n=60;
+        for(int i=0;i<720;i++) {
+            ArrayList<Location> locArr=Connector.locationsApi(Auth_Key);
+
+            ArrayList<Truck> truckArr=Connector.trucksApi(Auth_Key);
+            System.out.println(locArr.toString());
+            System.out.println(truckArr.toString());
+
+            JSONObject jsonObject=makeCommands(locArr,truckArr);
+
+            System.out.println((i+1)+"분후 : "+ Connector.simulateApi(Auth_Key,jsonObject).toString());
+
+        }
+        System.out.println(Connector.scoreApi(Auth_Key));
+
     }
     static JSONObject makeCommands(ArrayList<Location> locations,ArrayList<Truck> trucks) {
 
@@ -41,7 +59,7 @@ public class Main {
         ArrayList<Location> fillSpace = new ArrayList<>();
         ArrayList<Location> takeSpace=new ArrayList<>();
         for (int i = 0; i < locations.size(); i++) {
-            if (locations.get(i).getLocated_bikes_count() <= average - 3) {
+            if (locations.get(i).getLocated_bikes_count() < average/2) {
                 fillSpace.add(locations.get(i));
             } else {
                 break;
@@ -51,13 +69,13 @@ public class Main {
 
 
         for(int i=locations.size()-1;i>=0;i--){
-            if (locations.get(i).getLocated_bikes_count() >= average - 1) {
+            if (locations.get(i).getLocated_bikes_count() >= average/2+1) {
                 takeSpace.add(locations.get(i));
             } else {
                 break;
             }
         }
-        System.out.println("Change!!!! "+ takeSpace.toString());
+        System.out.println("takeSpace : "+ takeSpace.toString());
         ArrayList<Command> commands=new ArrayList<>();
         for(int i=0;i<trucks.size();i++) {//트럭 id가 index인 Command
             commands.add(new Command(trucks.get(i).getId()));
@@ -108,7 +126,7 @@ public class Main {
             });
 
             for(int j=0;j<trucks.size();j++){
-                if(spaces.get(i).getLocated_bikes_count()>=average-1)break;
+                if(spaces.get(i).getLocated_bikes_count()>=average/2+1)break;
                 if(trucks.get(j).getLoaded_bikes_count()==0)continue;
                 Command truckCommand=Commands.get(trucks.get(j).getId());
 
@@ -125,15 +143,15 @@ public class Main {
 
 
     private static void countBike(Truck truck,Location location,Command command) {
-        if(location.getLocated_bikes_count()>=average-1){//바이크를 뺴야하는 경우 평균까지만
-            while(location.getLocated_bikes_count()>=average-1&&truck.getTime_remaining()>=6) {
+        if(location.getLocated_bikes_count()>=average/2+1){//바이크를 뺴야하는 경우 평균까지만
+            while(location.getLocated_bikes_count()>=average/2+1&&truck.getTime_remaining()>=6) {
                 location.setLocated_bikes_count(location.getLocated_bikes_count() - 1);
                 truck.useTime();
                 truck.setLoaded_bikes_count(truck.getLoaded_bikes_count() + 1);
                 command.getCommand().add(5);
             }
         }else{
-            while(location.getLocated_bikes_count()<average-1&&truck.getTime_remaining()>=6&&truck.getLoaded_bikes_count()>0) {
+            while(location.getLocated_bikes_count()<average/2+1&&truck.getTime_remaining()>=6&&truck.getLoaded_bikes_count()>0) {
                 location.setLocated_bikes_count(location.getLocated_bikes_count() + 1);
                 truck.useTime();
                 truck.setLoaded_bikes_count(truck.getLoaded_bikes_count() - 1);
