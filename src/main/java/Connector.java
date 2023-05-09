@@ -88,7 +88,7 @@ public class Connector {
 
 
             int responseCode = connection.getResponseCode();
-            System.out.println("응답코드: " + responseCode);
+            //System.out.println("응답코드: " + responseCode);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
@@ -127,7 +127,7 @@ public class Connector {
 
 
             int responseCode = connection.getResponseCode();
-            System.out.println("응답코드: " + responseCode);
+           // System.out.println("응답코드: " + responseCode);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
@@ -168,18 +168,10 @@ public class Connector {
             //commands.put("commands", "{ }");
             JSONArray commands_array=new JSONArray();
 
-            commands.put("truck_id","0");
-            JSONArray example=new JSONArray();
-            example.add(1);
-            example.add(2);
-            commands.put("command",example);
-            commands_array.add(commands);
-            total.put("commands",commands_array);
-
 
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
-            System.out.println(total.toString());
-            outputStream.writeBytes(total.toString());
+            System.out.println(jsonArray.toString());
+            outputStream.writeBytes(jsonArray.toString());
             outputStream.flush();
             outputStream.close();
 
@@ -222,7 +214,7 @@ public class Connector {
 
 
             int responseCode = connection.getResponseCode();
-            System.out.println("응답코드: " + responseCode);
+           // System.out.println("응답코드: " + responseCode);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
