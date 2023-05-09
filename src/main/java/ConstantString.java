@@ -10,5 +10,7 @@ public class ConstantString {
     public static String TRUCKS_API="/trucks";
 
     public static String SIMULATE_API="/simulate";
+
+    public static String SCORE_API="/score";
 }
 

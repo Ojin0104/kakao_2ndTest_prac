@@ -5,6 +5,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,7 +14,7 @@ public class Connector {
     private static String jsonType = "application/json";
 
 
-    public static String StartApi(int problemNum) {
+    public static String startApi(int problemNum) {
         URL url;
         StringBuilder response = new StringBuilder();
         JSONObject result = null;
@@ -70,44 +71,178 @@ public class Connector {
     }
 
 
-    public static String LocationsApi(String Auth_Key) {
+    public static String locationsApi(String Auth_Key) {
 
         URL url;
         StringBuilder response = new StringBuilder();
         JSONObject result = null;
-        {
-            try {
-                url = new URL(ConstantString.BASE_URL + ConstantString.LOCATIONS_API);
 
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setRequestProperty("Content-Type", jsonType);
-                connection.setRequestProperty("Authorization", Auth_Key);
+        try {
+            url = new URL(ConstantString.BASE_URL + ConstantString.LOCATIONS_API);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", jsonType);
+            connection.setRequestProperty("Authorization", Auth_Key);
 
 
-                int responseCode = connection.getResponseCode();
-                System.out.println("응답코드: " + responseCode);
+            int responseCode = connection.getResponseCode();
+            System.out.println("응답코드: " + responseCode);
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
 
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                // 응답 내용 출력
-                //System.out.println("응답 내용: " + response.toString());
-                result = (JSONObject) new JSONParser().parse(response.toString());
-                // 연결 종료
-                connection.disconnect();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
-            return result.toString();
+            reader.close();
+
+            // 응답 내용 출력
+            //System.out.println("응답 내용: " + response.toString());
+            result = (JSONObject) new JSONParser().parse(response.toString());
+            // 연결 종료
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
+        return result.toString();
+
+    }
+
+    public static String trucksApi(String Auth_Key) {
+        URL url;
+        StringBuilder response = new StringBuilder();
+        JSONObject result = null;
+
+        try {
+            url = new URL(ConstantString.BASE_URL + ConstantString.TRUCKS_API);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", jsonType);
+            connection.setRequestProperty("Authorization", Auth_Key);
+
+
+            int responseCode = connection.getResponseCode();
+            System.out.println("응답코드: " + responseCode);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // 응답 내용 출력
+            //System.out.println("응답 내용: " + response.toString());
+            result = (JSONObject) new JSONParser().parse(response.toString());
+            // 연결 종료
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return result.toString();
+    }
+
+    public static String simulateApi(String Auth_Key){
+        URL url;
+        StringBuilder response = new StringBuilder();
+        JSONObject result = null;
+
+        try {
+            url = new URL(ConstantString.BASE_URL + ConstantString.SIMULATE_API);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", jsonType);
+            connection.setRequestProperty("Authorization", Auth_Key);
+            connection.setDoOutput(true);
+            JSONObject total=new JSONObject();
+            JSONObject commands = new JSONObject();
+            //commands.put("commands", "{ }");
+            JSONArray commands_array=new JSONArray();
+
+            commands.put("truck_id","0");
+            JSONArray example=new JSONArray();
+            example.add(1);
+            example.add(2);
+            commands.put("command",example);
+            commands_array.add(commands);
+            total.put("commands",commands_array);
+
+
+            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+            System.out.println(total.toString());
+            outputStream.writeBytes(total.toString());
+            outputStream.flush();
+            outputStream.close();
+
+            int responseCode = connection.getResponseCode();
+            System.out.println("응답코드: " + responseCode);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // 응답 내용 출력
+            //System.out.println("응답 내용: " + response.toString());
+            result = (JSONObject) new JSONParser().parse(response.toString());
+            // 연결 종료
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return result.toString();
+    }
+
+    public static String scoreApi(String Auth_Key){
+        URL url;
+        StringBuilder response = new StringBuilder();
+        JSONObject result = null;
+
+        try {
+            url = new URL(ConstantString.BASE_URL + ConstantString.SCORE_API);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", jsonType);
+            connection.setRequestProperty("Authorization", Auth_Key);
+
+
+            int responseCode = connection.getResponseCode();
+            System.out.println("응답코드: " + responseCode);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // 응답 내용 출력
+            //System.out.println("응답 내용: " + response.toString());
+            result = (JSONObject) new JSONParser().parse(response.toString());
+            // 연결 종료
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return result.toString();
     }
 }
 
