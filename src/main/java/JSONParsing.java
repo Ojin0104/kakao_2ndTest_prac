@@ -15,6 +15,7 @@ public class JSONParsing {
             JSONObject truck=(JSONObject) responseArr.get(i);
             trucks.add(new Truck(Integer.parseInt(String.valueOf(truck.get("id"))),Integer.parseInt(String.valueOf(truck.get("location_id"))),Integer.parseInt(String.valueOf(truck.get("loaded_bikes_count")))));
 
+
         }
         return trucks;
     }
