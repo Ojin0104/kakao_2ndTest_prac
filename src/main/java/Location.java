@@ -6,6 +6,11 @@ public class Location {
         return id;
     }
 
+    public Location(int id, int located_bikes_count) {
+        this.id = id;
+        this.located_bikes_count = located_bikes_count;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
