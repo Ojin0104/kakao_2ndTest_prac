@@ -150,7 +150,7 @@ public class Connector {
         return JSONParsing.JsonToTruckArr(result);
     }
 
-    public static String simulateApi(String Auth_Key,JSONArray jsonArray){
+    public static String simulateApi(String Auth_Key,JSONObject jsonObject){
         URL url;
         StringBuilder response = new StringBuilder();
         JSONObject result = null;
@@ -170,8 +170,8 @@ public class Connector {
 
 
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
-            System.out.println(jsonArray.toString());
-            outputStream.writeBytes(jsonArray.toString());
+            System.out.println(jsonObject.toString());
+            outputStream.writeBytes(jsonObject.toString());
             outputStream.flush();
             outputStream.close();
 

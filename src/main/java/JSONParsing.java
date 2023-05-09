@@ -5,7 +5,7 @@ import org.json.simple.parser.JSONParser;
 import java.util.ArrayList;
 
 public class JSONParsing {
-    public JSONParser jsonParser=new JSONParser();
+    public static JSONParser jsonParser=new JSONParser();
 
     public static ArrayList<Truck> JsonToTruckArr(JSONObject response){
         ArrayList<Truck> trucks= new ArrayList<>();
@@ -27,6 +27,20 @@ public class JSONParsing {
             locations.add(new Location(ObjectToInt(location.get("id")),ObjectToInt(location.get("located_bikes_count"))));
         }
         return locations;
+    }
+
+    public static JSONObject CommandsArrToJson(ArrayList<Command> commands){
+        JSONArray jsonArray=new JSONArray();
+
+        for(int i=0;i<commands.size();i++){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("truck_id",commands.get(i).getTruck_id());
+            jsonObject.put("command",commands.get(i).getCommand());
+            jsonArray.add(jsonObject);
+        }
+        JSONObject answer=new JSONObject();
+        answer.put("commands",jsonArray);
+        return answer;
     }
 
     public static Integer ObjectToInt(Object o){

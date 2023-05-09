@@ -15,6 +15,7 @@ public class Truck {
 
     public int useTime(){
         this.time_remaining-=6;
+        return this.time_remaining;
     }
 
     @Override
