@@ -12,10 +12,11 @@ import org.json.simple.parser.ParseException;
 public class Connector {
     private static String jsonType = "application/json";
 
-    public static JSONObject StartApi(int problemNum) {
+
+    public static String StartApi(int problemNum) {
         URL url;
         StringBuilder response = new StringBuilder();
-        JSONObject result=null;
+        JSONObject result = null;
         {
             try {
                 url = new URL(ConstantString.BASE_URL + ConstantString.START_API);
@@ -51,7 +52,7 @@ public class Connector {
                 result = (JSONObject) new JSONParser().parse(response.toString());
                 // 연결 종료
                 connection.disconnect();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 //            } catch (MalformedURLException e) {
@@ -64,8 +65,49 @@ public class Connector {
 //                e.printStackTrace();
 //            }
         }
-        return result;
+        return result.get("auth_key").toString();
 
+    }
+
+
+    public static String LocationsApi(String Auth_Key) {
+
+        URL url;
+        StringBuilder response = new StringBuilder();
+        JSONObject result = null;
+        {
+            try {
+                url = new URL(ConstantString.BASE_URL + ConstantString.LOCATIONS_API);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-Type", jsonType);
+                connection.setRequestProperty("Authorization", Auth_Key);
+
+
+                int responseCode = connection.getResponseCode();
+                System.out.println("응답코드: " + responseCode);
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+
+                // 응답 내용 출력
+                //System.out.println("응답 내용: " + response.toString());
+                result = (JSONObject) new JSONParser().parse(response.toString());
+                // 연결 종료
+                connection.disconnect();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return result.toString();
+        }
     }
 }
 
