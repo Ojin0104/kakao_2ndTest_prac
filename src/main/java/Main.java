@@ -1,3 +1,8 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -5,13 +10,22 @@ public class Main {
         String Auth_Key=Connector.startApi(1);
         //System.out.println(Connector.StartApi(2));
 
-        System.out.println(Connector.locationsApi(Auth_Key));
 
-        System.out.println(Connector.trucksApi(Auth_Key));
         for(int i=0;i<720;i++) {
-            System.out.println(Connector.simulateApi(Auth_Key));
+            ArrayList<Location> locArr=Connector.locationsApi(Auth_Key);
+
+            ArrayList<Truck> truckArr=Connector.trucksApi(Auth_Key);
+            JSONArray jsonArray=makeCommands(locArr,truckArr);
+            System.out.println(Connector.simulateApi(Auth_Key,jsonArray));
             break;
         }
         //System.out.println(Connector.scoreApi(Auth_Key));
+    }
+    static JSONArray makeCommands(ArrayList<Location> locations,ArrayList<Truck> trucks){
+        JSONArray commands=new JSONArray();
+
+
+
+        return commands;
     }
 }

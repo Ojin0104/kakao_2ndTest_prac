@@ -72,7 +72,7 @@ public class Connector {
     }
 
 
-    public static String locationsApi(String Auth_Key) {
+    public static ArrayList<Location> locationsApi(String Auth_Key) {
 
         URL url;
         StringBuilder response = new StringBuilder();
@@ -108,7 +108,7 @@ public class Connector {
             e.printStackTrace();
 
         }
-        return result.toString();
+        return JSONParsing.JsonToLocationArr(result);
 
     }
 
@@ -150,7 +150,7 @@ public class Connector {
         return JSONParsing.JsonToTruckArr(result);
     }
 
-    public static String simulateApi(String Auth_Key){
+    public static String simulateApi(String Auth_Key,JSONArray jsonArray){
         URL url;
         StringBuilder response = new StringBuilder();
         JSONObject result = null;

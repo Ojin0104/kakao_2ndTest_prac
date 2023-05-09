@@ -5,6 +5,7 @@ public class Simulate {
     private String distance;
     private int failed_requests_count;
 
+
     public String getStatus() {
         return status;
     }
