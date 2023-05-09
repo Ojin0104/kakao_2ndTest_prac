@@ -7,9 +7,9 @@ public class Command {
     private int truck_id;
     private ArrayList<Integer> command;
 
-    public Command(int truck_id,ArrayList<Integer> commands){
+    public Command(int truck_id){
         this.truck_id=truck_id;
-        this.command=commands;
+        this.command=new ArrayList<>();
     }
 
     public int getTruck_id() {
