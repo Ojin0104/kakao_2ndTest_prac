@@ -8,12 +8,13 @@ import java.util.Comparator;
 
 public class Main {
     public static int average;
+    public static int n;
     public static void main(String[] args) {
 	// write your code here
         String Auth_Key=Connector.startApi(1);
         //System.out.println(Connector.StartApi(2));
         average=4;
-
+        n=5;
         for(int i=0;i<720;i++) {
             ArrayList<Location> locArr=Connector.locationsApi(Auth_Key);
 
@@ -127,7 +128,35 @@ public class Main {
         }
 
 
-    private static void findRoute(Truck truck, Location location, Command truckCommand) {
-    int
+    private static void findRoute(Truck truck, Location location, Command command) {
+        int loc_id=location.getId();
+        int loc_truck=truck.getLocation_id();
+
+        int truck_c=loc_truck/n;
+        int loc_c=loc_id/n;
+        int truck_r=loc_truck%n;
+        int loc_r=loc_id%n;
+
+        while(truck_c!=loc_c&&truck.getTime_remaining()>=6){
+            if(truck_c>loc_c){
+                command.getCommand().add(4);
+                truck_c--;
+            }else{
+                command.getCommand().add(2);
+                truck_c++;
+            }
+            truck.useTime();
+        }
+
+        while(truck_r!=loc_r&&truck.getTime_remaining()>=6){
+            if(truck_r>loc_r){
+                command.getCommand().add(3);
+                truck_r--;
+            }else{
+                command.getCommand().add(1);
+                truck_r++;
+            }
+            truck.useTime();
+        }
     }
 }
