@@ -5,6 +5,15 @@ public class Simulate {
     private String distance;
     private int failed_requests_count;
 
+    @Override
+    public String toString() {
+        return "Simulate{" +
+                "status='" + status + '\'' +
+                ", time=" + time +
+                ", distance='" + distance + '\'' +
+                ", failed_requests_count=" + failed_requests_count +
+                '}';
+    }
 
     public String getStatus() {
         return status;

@@ -20,6 +20,14 @@ public class Command {
         this.truck_id = truck_id;
     }
 
+    @Override
+    public String toString() {
+        return "Command{" +
+                "truck_id=" + truck_id +
+                ", command=" + command +
+                '}';
+    }
+
     public ArrayList<Integer> getCommand() {
         return command;
     }

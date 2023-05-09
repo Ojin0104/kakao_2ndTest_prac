@@ -24,7 +24,7 @@ public class Main {
     static JSONArray makeCommands(ArrayList<Location> locations,ArrayList<Truck> trucks){
         JSONArray commands=new JSONArray();
 
-
+        System.out.println(locations.get(i))
 
         return commands;
     }

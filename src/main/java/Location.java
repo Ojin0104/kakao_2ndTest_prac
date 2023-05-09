@@ -2,6 +2,14 @@ public class Location {
     private int id;
     private int located_bikes_count;
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", located_bikes_count=" + located_bikes_count +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
