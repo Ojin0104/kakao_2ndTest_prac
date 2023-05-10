@@ -19,8 +19,8 @@ public class Main {
             ArrayList<Location> locArr=Connector.locationsApi(Auth_Key);
 
             ArrayList<Truck> truckArr=Connector.trucksApi(Auth_Key);
-            System.out.println(locArr.toString());
-            System.out.println(truckArr.toString());
+           // System.out.println(locArr.toString());
+            //System.out.println(truckArr.toString());
 
             JSONObject jsonObject=makeCommands(locArr,truckArr);
 
@@ -36,8 +36,8 @@ public class Main {
             ArrayList<Location> locArr=Connector.locationsApi(Auth_Key);
 
             ArrayList<Truck> truckArr=Connector.trucksApi(Auth_Key);
-            System.out.println(locArr.toString());
-            System.out.println(truckArr.toString());
+            //System.out.println(locArr.toString());
+           // System.out.println(truckArr.toString());
 
             JSONObject jsonObject=makeCommands(locArr,truckArr);
 

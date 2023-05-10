@@ -1,7 +1,7 @@
 public class ConstantString {
     public static String BASE_URL="https://kox947ka1a.execute-api.ap-northeast-2.amazonaws.com/prod/users";
 
-    public static String AUTH_TOKEN="1deb06c276f78ce3be2d01d2ce5b582e";
+    public static String AUTH_TOKEN="부여된 토큰";
 
     public static String START_API="/start";
 
